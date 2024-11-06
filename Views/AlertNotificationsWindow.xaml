@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfRequestResponseLogger.Views.AlertNotificationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Alert Notifications" Height="511" Width="725">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="DeleteButton" Content="Delete" Width="80" Margin="5" Click="DeleteButton_Click"/>
+            <Button x:Name="ExitButton" Content="Exit" Width="80" Margin="5" Click="ExitButton_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="AlertNotificationsGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="30"/>
+                <DataGridTextColumn Header="Alert Instance ID" Binding="{Binding AlertInstanceId}" Width="100"/>
+                <DataGridTextColumn Header="Notification Type" Binding="{Binding NotificationType}" Width="100"/>
+                <DataGridTextColumn Header="Recipient" Binding="{Binding Recipient}" Width="100"/>
+                <DataGridTextColumn Header="Sent At (UTC)" Binding="{Binding SentAtUTC}" Width="150"/>
+                <DataGridTextColumn Header="Alert Rule ID" Binding="{Binding AlertRuleId}" Width="80"/>
+                <DataGridTextColumn Header="Alert Rule Name" Binding="{Binding AlertRuleName}" Width="150"/>
+                <DataGridTextColumn Header="Alert Type ID" Binding="{Binding AlertTypeId}" Width="80"/>
+                <DataGridTextColumn Header="Alert Type Name" Binding="{Binding AlertTypeName}" Width="280"/>
+                <DataGridTextColumn Header="Alert Value" Binding="{Binding AlertValue}" Width="70"/>
+                <DataGridTextColumn Header="Severity" Binding="{Binding Severity}" Width="60"/>
+                <DataGridTextColumn Header="Server ID" Binding="{Binding ServerId}" Width="60"/>
+                <DataGridTextColumn Header="Server Name" Binding="{Binding ServerName}" Width="150"/>
+                <DataGridTextColumn Header="Client IP" Binding="{Binding ClientIP}" Width="60"/>
+                <DataGridTextColumn Header="Endpoint ID" Binding="{Binding EndpointId}" Width="80"/>
+                <DataGridTextColumn Header="Endpoint Path" Binding="{Binding EndpointPath}" Width="150"/>
+                <DataGridTextColumn Header="Triggered At UTC" Binding="{Binding TriggeredAtUTC}" Width="150"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="150"/>
+
+
+
+
+
+
+
+
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

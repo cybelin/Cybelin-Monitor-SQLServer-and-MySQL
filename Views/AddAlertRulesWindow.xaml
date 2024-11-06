@@ -1,0 +1,58 @@
+﻿<Window x:Class="WpfRequestResponseLogger.AddAlertRulesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Alert Rule" Height="400" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Name Field -->
+        <Label Content="Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Width="300" Margin="0,5"/>
+
+        <!-- Alert Type ComboBox -->
+        <Label Content="Alert Type" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+        <ComboBox x:Name="cmbAlertTypeId" Grid.Row="1" Grid.Column="1" Width="300" Margin="0,5" SelectionChanged="CmbAlertTypeId_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding AlertTypeName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <!-- Alert Value -->
+        <Label Content="Alert Value" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+        <TextBox x:Name="txtAlertValue" Grid.Row="2" Grid.Column="1" Width="300" Margin="0,5"/>
+
+        <!-- Severity -->
+        <Label Content="Severity" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+        <TextBox x:Name="txtSeverity" Grid.Row="3" Grid.Column="1" Width="300" Margin="0,5"/>
+
+        <!-- Is Active Checkbox -->
+        <CheckBox x:Name="chkIsActive" Content="Is Active" Grid.Row="4" Grid.Column="1" Margin="0,5"/>
+
+        <!-- Active in All Servers Checkbox -->
+        <CheckBox x:Name="chkActiveInAllServers" Content="Active in All Servers" Grid.Row="5" Grid.Column="1" Margin="0,5"/>
+
+        <!-- Active in All Endpoints Checkbox -->
+        <CheckBox x:Name="chkActiveInAllEndpoints" Content="Active in All Endpoints" Grid.Row="6" Grid.Column="1" Margin="0,5"/>
+
+        <!-- Save and Exit Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,0">
+            <Button x:Name="btnSave" Content="Save" Width="100" Margin="5" Click="BtnSave_Click" Height="33"/>
+            <Button x:Name="btnExit" Content="Exit" Width="100" Margin="5" Click="BtnExit_Click" Height="34"/>
+        </StackPanel>
+    </Grid>
+</Window>

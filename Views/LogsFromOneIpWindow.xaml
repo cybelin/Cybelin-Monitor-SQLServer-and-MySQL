@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfRequestResponseLogger.Views.LogsFromOneIpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Get Logs From One Client IP" Height="597" Width="800">
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Query IP Logs">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Server Selection -->
+                    <Label Content="Server:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                    <ComboBox x:Name="ServerComboBox" Grid.Row="0" Grid.Column="1" Width="200" Margin="5,0,0,10" HorizontalAlignment="Left" />
+
+                    <!-- UTC DateTime -->
+                    <Label Content="UTC Datetime:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                    <TextBox x:Name="UtcDatetimeTextBox" Grid.Row="1" Grid.Column="1" Width="200" Margin="5,0,0,10" HorizontalAlignment="Left" />
+
+                    <!-- UTC Now Button -->
+                    <Label Content="" Grid.Row="2" Grid.Column="0" />
+                    <Button x:Name="UtcNowButton" Content="UTC Now" Grid.Row="2" Grid.Column="1" Width="100" Margin="5,0,0,10" HorizontalAlignment="Left" Click="UtcNowButton_Click" />
+
+                    <!-- IP Address -->
+                    <Label Content="Client IP:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                    <TextBox x:Name="IpAddressTextBox" Grid.Row="3" Grid.Column="1" Width="200" Margin="5,0,0,10" HorizontalAlignment="Left" />
+
+                    <!-- Last Seconds -->
+
+                    <!-- Execute Every TextBox -->
+
+                    <!-- Auto Update Checkbox -->
+                    <Label Content="" Grid.Row="6" Grid.Column="0" />
+
+                    <!-- Get Data Button -->
+                    <Label Content="" Grid.Row="7" Grid.Column="0" />
+                    <Button Name="GetDataButton" Content="Get Data" Grid.Row="7" Grid.Column="1" Width="100" Margin="5,0,0,10" HorizontalAlignment="Left" Click="GetDataButton_Click" />
+
+                    <!-- DataGrid for Logs -->
+                    <DataGrid x:Name="LogsDataGrid" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,51" AutoGenerateColumns="True" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

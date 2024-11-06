@@ -1,0 +1,10 @@
+﻿<Window x:Class="WpfRequestResponseLogger.SynchronizeBlacklistedIps"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Synchronize Blacklisted IPs" Height="200" Width="400">
+    <Grid>
+        <Button Name="SyncButton" Content="Synchronize IPs" Width="200" Height="50"
+                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Click="SyncButton_Click"/>
+    </Grid>
+</Window>

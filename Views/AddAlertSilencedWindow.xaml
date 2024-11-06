@@ -1,0 +1,30 @@
+﻿<Window x:Class="WpfRequestResponseLogger.Views.AddAlertSilencedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Silenced Alert" Height="392" Width="450">
+    <Grid>
+        <StackPanel Margin="20">
+            <!-- ComboBox for selecting Alert Rule Name -->
+            <TextBlock Text="Alert Rule:"/>
+            <ComboBox x:Name="AlertRuleComboBox" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,5"/>
+
+            <TextBlock Text="Silenced From (UTC):"/>
+            <TextBox x:Name="SilencedFromTextBox" Margin="0,5"/>
+
+            <TextBlock Text="Silenced Until (UTC):"/>
+            <TextBox x:Name="SilencedUntilTextBox" Margin="0,5"/>
+
+            <TextBlock Text="Reason:"/>
+            <TextBox x:Name="ReasonTextBox" Margin="0,5"/>
+
+            <!-- Button to Get UTC Now -->
+            <Button Content="Get UTC Now" Width="120" Height="30" Margin="10" Click="GetUtcNowButton_Click"/>
+
+            <!-- Buttons Save and Exit -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Save" Width="100" Margin="10" Click="SaveButton_Click"/>
+                <Button Content="Exit" Width="100" Margin="10" Click="ExitButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

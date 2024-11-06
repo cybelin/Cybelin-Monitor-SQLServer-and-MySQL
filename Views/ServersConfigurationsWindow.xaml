@@ -1,0 +1,46 @@
+﻿<Window x:Class="WpfRequestResponseLogger.ServersConfigurationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Servers Configurations" Height="450" Width="800">
+    <Grid>
+        <!-- StackPanel for Label and ComboBox -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+            <!-- Label for server selection -->
+            <Label Content="Server:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+            <!-- ComboBox for selecting server -->
+            <ComboBox x:Name="ServersComboBox" 
+                      Width="200"
+                      SelectionChanged="ServersComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Buttons positioned above the DataGrid and aligned to the right -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,50,0">
+            <Button Content="Add" 
+                    Width="100" 
+                    Margin="0,0,10,0" 
+                    Click="AddButton_Click"/>
+            <Button Content="Edit" 
+                    Width="100" 
+                    Margin="0,0,10,0" 
+                    Click="EditButton_Click"/>
+            <Button Content="Delete" 
+                    Width="100" 
+                    Margin="0,0,10,0" 
+                    Click="DeleteButton_Click"/>
+            <Button Content="Exit" 
+                    Width="100" 
+                    Click="ExitButton_Click"/>
+        </StackPanel>
+
+        <!-- DataGrid for displaying Configurations -->
+        <DataGrid x:Name="ConfigurationsDataGrid" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  Height="300" 
+                  Width="750" 
+                  Margin="10,100,10,10" 
+                  AutoGenerateColumns="True"
+                  CanUserAddRows="False"/>
+    </Grid>
+</Window>

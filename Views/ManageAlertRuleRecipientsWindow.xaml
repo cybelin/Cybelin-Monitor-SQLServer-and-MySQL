@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfRequestResponseLogger.Views.ManageAlertRuleRecipientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Alert Rule Recipients" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <!-- Buttons Panel -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button x:Name="AddButton" Content="Add" Width="100" Height="30" Margin="5" Click="AddButton_Click"/>
+                <Button x:Name="EditButton" Content="Edit" Width="100" Height="30" Margin="5" Click="EditButton_Click"/>
+                <Button x:Name="DeleteButton" Content="Delete" Width="100" Height="30" Margin="5" Click="DeleteButton_Click"/>
+                <Button x:Name="ExitButton" Content="Exit" Width="100" Height="30" Margin="5" Click="ExitButton_Click"/>
+            </StackPanel>
+
+            <!-- DataGrid for displaying data from the stored procedure -->
+            <DataGrid x:Name="AlertRuleRecipientsGrid" 
+                      AutoGenerateColumns="False" 
+                      Height="328" 
+                      Margin="10" 
+                      CanUserAddRows="False" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Alert Rule Recipient ID" Binding="{Binding AlertRuleRecipientId}" Width="150"/>
+                    <DataGridTextColumn Header="Alert Rule Name" Binding="{Binding AlertRuleName}" Width="200"/>
+                    <DataGridTextColumn Header="Recipient Name" Binding="{Binding RecipientName}" Width="200"/>
+                    <DataGridTextColumn Header="Alert Rule ID" Binding="{Binding AlertRuleId}" Width="100"/>
+                    <DataGridTextColumn Header="Recipient ID" Binding="{Binding RecipientId}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>

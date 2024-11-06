@@ -1,0 +1,299 @@
+﻿<Window x:Class="WpfRequestResponseLogger.Views.LogsAfterDateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Get Logs every X seconds and check alerts" Height="689" Width="908">
+    <Grid>
+        
+        <TabControl>
+            
+            <TabItem Header="Raw Data">
+                <Grid Margin="21,10,-1,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="92"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,10">
+                        <Label Content="Select SQL Server:" VerticalAlignment="Center" Margin="5"/>
+                        <ComboBox x:Name="ServerComboBox" Width="200" VerticalAlignment="Center" Margin="5"
+                                  DisplayMemberPath="ServerName" SelectedValuePath="ConnectionString"/>
+                    </StackPanel>
+
+                    
+
+                    
+
+                    
+                    <Grid Grid.Row="2" Margin="0,10,0,10" HorizontalAlignment="Center" Width="862">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="16*"/>
+                            <ColumnDefinition Width="77*"/>
+                        </Grid.ColumnDefinitions>
+
+                        
+
+                        
+                        <Label Content="Execute every:" Grid.Column="1" VerticalAlignment="Center" Width="100" Margin="20,0,0,0" />
+                        <TextBox x:Name="ExecuteEveryTextBox" Grid.Column="2" Width="100" Margin="5,0,0,0" VerticalAlignment="Center" />
+                        <Label Content="Seconds" Grid.Column="3" VerticalAlignment="Center" Width="100" Margin="20,0,20,0" />
+
+                        
+                        
+                        <CheckBox x:Name="AutoUpdateCheckBox" Grid.Column="6" Content="Execute" VerticalAlignment="Center"
+                        Margin="56,0,10,0" Checked="AutoUpdateCheckBox_CheckedChanged"
+                        Unchecked="AutoUpdateCheckBox_CheckedChanged" Grid.ColumnSpan="2" />
+                    </Grid>
+
+
+                    
+
+                    
+                    <DataGrid Grid.Row="3" x:Name="LogsDataGrid" AutoGenerateColumns="True" Margin="10,10,10,10"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="IP-1">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Outbound traffic per client IP in bytes" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab2DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+
+            <TabItem Header="IP-2">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of requests per client IP" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab3DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="IP-3">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of 4XX responses per client IP" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab4DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="IP-4">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of requests without response per client IP" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab5DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Endpoint-5">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Outbound traffic per endpoint in bytes" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab6DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Endpoint-6">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of requests per endpoint" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid x:Name="Tab7DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Endpoint-7">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of 4XX responses per endpoint" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid Name="Tab8DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Endpoint-8">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Number of requests without response per endpoint" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10"
+                   Grid.Row="0" />
+
+                    <DataGrid Name="Tab9DataGrid" 
+                  AutoGenerateColumns="True" 
+                  Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Server 9-12">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Data per server" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,10" 
+                   Grid.Row="0" />
+
+                    <!-- Outbound traffic per server in bytes -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10">
+                        <TextBlock Text="Outbound traffic in bytes:" 
+                       VerticalAlignment="Center" 
+                       Width="250" />
+                        <TextBox x:Name="OutboundTrafficTextBox" Width="200" />
+                    </StackPanel>
+
+                    <!-- Number of requests per server -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10">
+                        <TextBlock Text="Number of requests:" 
+                       VerticalAlignment="Center" 
+                       Width="250" />
+                        <TextBox x:Name="RequestsPerServerTextBox" Width="200" />
+                    </StackPanel>
+
+                    <!-- Number of 4XX responses per server -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10">
+                        <TextBlock Text="Number of 4XX responses:" 
+                       VerticalAlignment="Center" 
+                       Width="250" />
+                        <TextBox x:Name="Responses4XXTextBox" Width="200" />
+                    </StackPanel>
+
+                    <!-- Number of requests without response per server -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,0,0,10">
+                        <TextBlock Text="Number of requests without response:" 
+                       VerticalAlignment="Center" 
+                       Width="250" />
+                        <TextBox x:Name="RequestsWithoutResponseTextBox" Width="200" />
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Alert Rules">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Alert Rules that affect this server" 
+                            FontSize="14" 
+                            FontWeight="Bold" 
+                            Margin="0,0,0,10"
+                            Grid.Row="0" />
+
+                    <DataGrid Name="Tab11DataGrid" 
+                           AutoGenerateColumns="True" 
+                           Grid.Row="1" />
+                </Grid>
+            </TabItem>
+
+
+
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfRequestResponseLogger.EditAlertRuleEndpointsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Alert Rule Endpoint" Height="350" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <!-- Spacer row -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <!-- Spacer row -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Label and TextBox for Id (read-only) -->
+        <Label Grid.Row="0" Content="Id:"/>
+        <TextBox Grid.Row="0" x:Name="txtId" Margin="100,0,0,0" Width="250" IsReadOnly="True"/>
+
+        <!-- Spacer row between Id and AlertRule ComboBox -->
+
+        <!-- Label and ComboBox for AlertRuleId (displays AlertRule Name) -->
+        <Label Grid.Row="2" Content="Alert Rule:"/>
+        <ComboBox Grid.Row="2" x:Name="cbAlertRules" Margin="100,0,0,0" Width="250" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+        <!-- Spacer row between AlertRule ComboBox and AlertEndpoint ComboBox -->
+
+        <!-- Label and ComboBox for AlertEndpointId (displays Endpoint Path) -->
+        <Label Grid.Row="4" Content="Alert Endpoint:"/>
+        <ComboBox Grid.Row="4" x:Name="cbAlertEndpoints" Margin="100,0,0,0" Width="250" DisplayMemberPath="Path" SelectedValuePath="Id"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button x:Name="btnSave" Content="Save" Width="100" Margin="10" Click="BtnSave_Click"/>
+            <Button x:Name="btnExit" Content="Exit" Width="100" Margin="10" Click="BtnExit_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

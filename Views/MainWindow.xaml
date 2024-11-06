@@ -1,0 +1,53 @@
+<Window x:Class="WpfRequestResponseLogger.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Main Window" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Logs">
+                
+                
+
+                <MenuItem Header="Get Logs Every X Seconds And Check Alerts" Click="OpenLogsAfterDateWindow_Click"/>
+                <MenuItem Header="Get Logs From One Client IP" Click="OpenLogsFromOneIpWindow_Click" />
+                
+            </MenuItem>
+            <MenuItem Header="Manage Servers">
+                <MenuItem Header="Manage Servers" Click="ManageServers_Click"/>
+                <MenuItem Header="Manage Servers Configurations" Click="ManageServersConfigurations_Click"/>
+                <MenuItem Header="Manage Servers Blacklisted IPs" Click="ManageServersBlacklistedIps_Click"/>
+                <MenuItem Header="Synchronize Servers Blacklisted IPs" Click="SynchronizeBlacklistedIps_Click"/>
+            </MenuItem>
+            <MenuItem Header="Manage Monitor">
+                <MenuItem Header="Manage Monitor Blacklisted IPs" Click="OpenBlacklistedIpsWindow_Click"/>
+
+                <MenuItem Header="Manage Monitor Whitelisted IPs" Click="OpenManageWhitelistedIpsWindow_Click"/>
+                <MenuItem Header="Manage Monitor Configurations" Click="OpenConfigurationManagerWindow_Click"/>
+
+
+                
+            </MenuItem>
+
+            <MenuItem Header="Alert Management">
+                <MenuItem Header="Manage Alert Rules" Click="ManageAlertRulesWindow"/>
+                
+                <MenuItem Header="Manage Alert Recipients" Click="ManageAlertRecipients_Click"/>
+                <MenuItem Header="Manage Alert Endpoints" Click="ManageAlertEndpointsMenuItem_Click"/>
+                <MenuItem Header="Manage Alert Rules Recipients" Click="ManageAlertRuleRecipientsMenuItem_Click"/>
+                <MenuItem Header="Manage Alert Rules Endpoints" Click="ManageAlertRulesEndpointsMenuItem_Click"/>
+                <MenuItem Header="Manage Alert Rules Servers" Click="ManageAlertRulesServersMenuItem_Click"/>
+                <MenuItem Header="Manage Alert Silenced" Click="ManageAlertSilencedMenuItem_Click"/>
+                <MenuItem Header="Manage Alert Instances" Click="ManageAlertInstancesMenuItem_Click"/>
+
+                <MenuItem Header="Manage Alert Notifications" Click="AlertNotificationsMenuItem_Click"/>
+
+
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Exit" Click="ExitMenuItem_Click"/>
+        </Menu>
+        <Grid>
+            <TextBlock Text="Welcome to the Log Viewer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+        </Grid>
+    </DockPanel>
+</Window>

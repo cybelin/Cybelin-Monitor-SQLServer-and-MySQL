@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfRequestResponseLogger.ManageAlertRulesEndpointsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Alert Rules Endpoints" Height="350" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <!-- Buttons panel -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                <Button x:Name="btnAdd" Content="Add" Width="80" Margin="5" Click="BtnAdd_Click"/>
+                <Button x:Name="btnEdit" Content="Edit" Width="80" Margin="5" Click="BtnEdit_Click"/>
+                <Button x:Name="btnDelete" Content="Delete" Width="80" Margin="5" Click="BtnDelete_Click"/>
+                <Button x:Name="btnExit" Content="Exit" Width="80" Margin="5" Click="BtnExit_Click"/>
+            </StackPanel>
+
+            <!-- DataGrid to display AlertRuleEndpoints with details -->
+            <DataGrid x:Name="alertRulesEndpointsDataGrid" AutoGenerateColumns="False" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"  CanUserAddRows="False" >
+                <DataGrid.Columns>
+                    <!-- AlertRuleEndpointId Column -->
+                    <DataGridTextColumn Header="AlertRuleEndpointId" Binding="{Binding AlertRuleEndpointId}" IsReadOnly="True" Width="130"/>
+                    <!-- AlertRuleId Column -->
+                    <DataGridTextColumn Header="AlertRuleId" Binding="{Binding AlertRuleId}" Width="100"/>
+                    <!-- AlertEndpointId Column -->
+                    <DataGridTextColumn Header="AlertEndpointId" Binding="{Binding AlertEndpointId}" Width="100"/>
+                    <!-- AlertRuleName Column -->
+                    <DataGridTextColumn Header="AlertRuleName" Binding="{Binding AlertRuleName}" Width="200"/>
+                    <!-- AlertEndpointPath Column -->
+                    <DataGridTextColumn Header="AlertEndpointPath" Binding="{Binding AlertEndpointPath}" Width="200"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>
