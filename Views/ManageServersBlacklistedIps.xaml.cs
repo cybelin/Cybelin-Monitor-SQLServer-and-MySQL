@@ -32,14 +32,14 @@ namespace WpfRequestResponseLogger
         {
             if (ServersComboBox.SelectedItem is Server selectedServer)
             {
-                LoadBlacklistedIps(selectedServer.ConnectionString);
+                LoadBlacklistedIps(selectedServer.ConnectionString, selectedServer.ServerType);
             }
         }
 
         // Load the Blacklisted IPs from the selected server
-        private void LoadBlacklistedIps(string connectionString)
+        private void LoadBlacklistedIps(string connectionString, string serverType)
         {
-            using (var context = new DataContext2(connectionString))
+            using (var context = new DataContext2(connectionString, serverType))
             {
                 var blacklistedIps = context.BlacklistedIps.ToList();
                 BlacklistedIpsDataGrid.ItemsSource = blacklistedIps;
@@ -52,12 +52,12 @@ namespace WpfRequestResponseLogger
             if (ServersComboBox.SelectedItem is Server selectedServer)
             {
                 // Open the AddServerBlacklistedIp window
-                AddServerBlacklistedIp addIpWindow = new AddServerBlacklistedIp(selectedServer.ConnectionString);
+                AddServerBlacklistedIp addIpWindow = new AddServerBlacklistedIp(selectedServer.ConnectionString,selectedServer.ServerType);
 
                 // Show the window as a dialog and if Save was successful, reload the grid
                 if (addIpWindow.ShowDialog() == true)
                 {
-                    LoadBlacklistedIps(selectedServer.ConnectionString);
+                    LoadBlacklistedIps(selectedServer.ConnectionString, selectedServer.ServerType);
                 }
             }
             else
@@ -77,13 +77,13 @@ namespace WpfRequestResponseLogger
                 if (ServersComboBox.SelectedItem is Server selectedServer)
                 {
                     // Open the EditServerBlacklistedIp window, passing the selected server's connection string and the selected BlacklistedIp object
-                    EditServerBlacklistedIp editIpWindow = new EditServerBlacklistedIp(selectedServer.ConnectionString, selectedIp);
+                    EditServerBlacklistedIp editIpWindow = new EditServerBlacklistedIp(selectedServer.ConnectionString,selectedServer.ServerType, selectedIp);
 
                     // Show the window as a dialog and check if the save was successful
                     if (editIpWindow.ShowDialog() == true)
                     {
                         // Reload the Blacklisted IPs from the database after the edit
-                        LoadBlacklistedIps(selectedServer.ConnectionString);
+                        LoadBlacklistedIps(selectedServer.ConnectionString, selectedServer.ServerType);
                     }
                 }
                 else
@@ -119,17 +119,20 @@ namespace WpfRequestResponseLogger
         // Delete the selected Blacklisted IP
         private void DeleteBlacklistedIp(BlacklistedIp ip)
         {
-            using (var context = new DataContext2(ServersComboBox.SelectedValue.ToString()))
+            var selectedServer = ServersComboBox.SelectedItem as Server;
+            string serverType = selectedServer.ServerType;
+            string connectionString = selectedServer.ConnectionString;
+
+            using (var context = new DataContext2(connectionString, serverType))
             {
                 context.BlacklistedIps.Remove(ip);
                 context.SaveChanges();
-                
+
             }
 
-            if (ServersComboBox.SelectedItem is Server selectedServer)
-            {
-                LoadBlacklistedIps(selectedServer.ConnectionString);
-            }
+            
+                LoadBlacklistedIps(selectedServer.ConnectionString, selectedServer.ServerType);
+            
         }
 
         // Event handler for Exit button

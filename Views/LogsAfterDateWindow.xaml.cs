@@ -39,13 +39,23 @@ namespace WpfRequestResponseLogger.Views
         
 
         
-        public List<LogData> GetLogsAfterDateUsingDbContext(DateTime requestTimeFilter, string connectionString)
+        public List<LogData> GetLogsAfterDateUsingDbContext(DateTime requestTimeFilter, string connectionString, string serverType)
         {
-            var context = new DataContext2(connectionString);
-            var logsList = context.Set<LogData>()
-                .FromSqlInterpolated($"EXEC GetLogsAfterDate @RequestTimeFilter = {requestTimeFilter}")
-                .ToList();
-
+            var context = new DataContext2(connectionString, serverType);
+            List<LogData> logsList = new List<LogData>();
+            if (serverType == "sqlserver")
+            {
+                logsList = context.Set<LogData>()
+                    .FromSqlInterpolated($"EXEC GetLogsAfterDate @RequestTimeFilter = {requestTimeFilter}")
+                    .ToList();
+            }
+            else if (serverType == "mysql")
+            {
+                //  CALL instead of EXEC
+                logsList = context.Set<LogData>()
+                    .FromSqlInterpolated($"CALL GetLogsAfterDate({requestTimeFilter:yyyy-MM-dd HH:mm:ss.fff})")
+                    .ToList();
+            }
             return logsList;
 
         }
@@ -110,16 +120,18 @@ namespace WpfRequestResponseLogger.Views
             if (true)
             {
                 
-                string connectionString = (string)ServerComboBox.SelectedValue; // Obtener la cadena de conexión seleccionada
+                string connectionString = (string)ServerComboBox.SelectedValue; 
+                
                 if (connectionString == null)
                 {
-                    MessageBox.Show("Please select a SQL server.");
+                    MessageBox.Show("Please select a server.");
                     return;
                 }
-
+                var selectedServer2 = ServerComboBox.SelectedItem as Server;
+                string serverType = selectedServer2.ServerType;
                 try
                 {
-                    _logsList = GetLogsAfterDateUsingDbContext(requestTimeFilter, connectionString); // Pasamos la cadena de conexión
+                    _logsList = GetLogsAfterDateUsingDbContext(requestTimeFilter, connectionString, serverType); 
                     LogsDataGrid.ItemsSource = _logsList;
                 }
                 catch (Exception ex)

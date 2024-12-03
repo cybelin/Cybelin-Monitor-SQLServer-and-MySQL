@@ -8,12 +8,14 @@ namespace WpfRequestResponseLogger
     public partial class EditServerBlacklistedIp : Window
     {
         private string _connectionString;
+        private string _serverType;
         private BlacklistedIp _selectedBlacklistedIp;
 
-        public EditServerBlacklistedIp(string connectionString, BlacklistedIp selectedBlacklistedIp)
+        public EditServerBlacklistedIp(string connectionString, string serverType, BlacklistedIp selectedBlacklistedIp)
         {
             InitializeComponent();
             _connectionString = connectionString;
+            _serverType = serverType;
             _selectedBlacklistedIp = selectedBlacklistedIp;
 
             // Load the selected Blacklisted IP data into the TextBoxes
@@ -59,7 +61,7 @@ namespace WpfRequestResponseLogger
             _selectedBlacklistedIp.IsActive = IsActiveCheckBox.IsChecked ?? false;
 
             // Save the changes to the database
-            using (var context = new DataContext2(_connectionString))
+            using (var context = new DataContext2(_connectionString, _serverType))  
             {
                 context.BlacklistedIps.Update(_selectedBlacklistedIp);
                 context.SaveChanges();

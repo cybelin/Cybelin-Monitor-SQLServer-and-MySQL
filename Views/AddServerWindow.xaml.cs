@@ -2,6 +2,7 @@
 using System.Windows;
 using WpfRequestResponseLogger.Models;
 using WpfRequestResponseLogger.Data;
+using System.Windows.Controls;
 
 namespace WpfRequestResponseLogger.Views
 {
@@ -16,7 +17,6 @@ namespace WpfRequestResponseLogger.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
             if (string.IsNullOrWhiteSpace(ServerNameTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid server name.");
@@ -29,7 +29,14 @@ namespace WpfRequestResponseLogger.Views
                 return;
             }
 
-            
+            // Validate ComboBox selection
+            var selectedServerType = (ServerTypeComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            if (string.IsNullOrWhiteSpace(selectedServerType))
+            {
+                MessageBox.Show("Please select a valid server type.");
+                return;
+            }
+
             try
             {
                 using (var context = new DataContext())
@@ -37,7 +44,8 @@ namespace WpfRequestResponseLogger.Views
                     var newServer = new Server
                     {
                         ServerName = ServerNameTextBox.Text,
-                        ConnectionString = ConnectionStringTextBox.Text
+                        ConnectionString = ConnectionStringTextBox.Text,
+                        ServerType = selectedServerType // Store selected server type
                     };
 
                     context.Servers.Add(newServer);
@@ -56,7 +64,7 @@ namespace WpfRequestResponseLogger.Views
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close(); 
+            this.Close();
         }
     }
 }

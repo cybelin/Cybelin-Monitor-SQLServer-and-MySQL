@@ -32,7 +32,7 @@ namespace WpfRequestResponseLogger
         {
             if (ServersComboBox.SelectedItem is Server selectedServer)
             {
-                using (var context = new DataContext2(selectedServer.ConnectionString)) // Use the selected server's connection string
+                using (var context = new DataContext2(selectedServer.ConnectionString, selectedServer.ServerType)) // Use the selected server's connection string
                 {
                     var configurations = context.Configurations.ToList();
                     ConfigurationsDataGrid.ItemsSource = configurations;
@@ -47,13 +47,13 @@ namespace WpfRequestResponseLogger
             if (ServersComboBox.SelectedItem is Server selectedServer)
             {
                 // Open the AddServerConfiguration window with the selected server's connection string
-                AddServerConfiguration addConfigWindow = new AddServerConfiguration(selectedServer.ConnectionString);
+                AddServerConfiguration addConfigWindow = new AddServerConfiguration(selectedServer.ConnectionString,selectedServer.ServerType);
 
                 // Show the window as a dialog and check if the Save was successful
                 if (addConfigWindow.ShowDialog() == true)
                 {
                     // If Save was successful, reload the configurations in the grid
-                    using (var context = new DataContext2(selectedServer.ConnectionString))
+                    using (var context = new DataContext2(selectedServer.ConnectionString, selectedServer.ServerType))
                     {
                         var configurations = context.Configurations.ToList();
                         ConfigurationsDataGrid.ItemsSource = configurations;
@@ -79,12 +79,12 @@ namespace WpfRequestResponseLogger
             var selectedServer = (Server)ServersComboBox.SelectedItem;
 
             // Open the EditServerConfiguration window with the selected server's connection string and configuration
-            EditServerConfiguration editConfigWindow = new EditServerConfiguration(selectedServer.ConnectionString, selectedConfiguration);
+            EditServerConfiguration editConfigWindow = new EditServerConfiguration(selectedServer.ConnectionString, selectedServer.ServerType, selectedConfiguration);
 
             // Show the window as a dialog and if Save was successful, reload the configurations
             if (editConfigWindow.ShowDialog() == true)
             {
-                using (var context = new DataContext2(selectedServer.ConnectionString))
+                using (var context = new DataContext2(selectedServer.ConnectionString, selectedServer.ServerType))
                 {
                     var configurations = context.Configurations.ToList();
                     ConfigurationsDataGrid.ItemsSource = configurations;
@@ -112,10 +112,10 @@ namespace WpfRequestResponseLogger
             if (result == MessageBoxResult.Yes)
             {
                 // Perform deletion from the database
-                DeleteConfiguration(selectedServer.ConnectionString, selectedConfiguration);
+                DeleteConfiguration(selectedServer.ConnectionString, selectedServer.ServerType, selectedConfiguration);
 
                 // Refresh the DataGrid after deletion
-                using (var context = new DataContext2(selectedServer.ConnectionString))
+                using (var context = new DataContext2(selectedServer.ConnectionString, selectedServer.ServerType))
                 {
                     var configurations = context.Configurations.ToList();
                     ConfigurationsDataGrid.ItemsSource = configurations;
@@ -124,9 +124,9 @@ namespace WpfRequestResponseLogger
         }
 
         // Method to delete the selected configuration from the database
-        private void DeleteConfiguration(string connectionString, Configuration configuration)
+        private void DeleteConfiguration(string connectionString, string serverType,Configuration configuration)
         {
-            using (var context = new DataContext2(connectionString))
+            using (var context = new DataContext2(connectionString, serverType))
             {
                 context.Configurations.Remove(configuration);
                 context.SaveChanges();

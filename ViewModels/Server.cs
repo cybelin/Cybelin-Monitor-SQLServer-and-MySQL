@@ -11,5 +11,6 @@ namespace WpfRequestResponseLogger.Models
         public int Id { get; set; }
         public string ServerName { get; set; }
         public string ConnectionString { get; set; }
+        public string ServerType { get; set; }
     }
 }

@@ -3,13 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Manage Servers" Height="450" Width="800">
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
             <Button Content="Add" Width="75" Margin="5" Click="AddButton_Click"/>
             <Button Content="Edit" Width="75" Margin="5" Click="EditButton_Click"/>
@@ -17,11 +15,11 @@
             <Button Content="Exit" Width="75" Margin="5" Click="ExitButton_Click"/>
         </StackPanel>
 
-        
         <DataGrid x:Name="ServersDataGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Server ID" Binding="{Binding Id}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Server Name" Binding="{Binding ServerName}"/>
+                <DataGridTextColumn Header="Server Type" Binding="{Binding ServerType}"/>
                 <DataGridTextColumn Header="Connection String" Binding="{Binding ConnectionString}"/>
             </DataGrid.Columns>
         </DataGrid>

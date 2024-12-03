@@ -87,13 +87,23 @@ namespace WpfRequestResponseLogger.Views
             {
                 if (ServerComboBox.SelectedValue == null)
                 {
-                    MessageBox.Show("Please select a SQL server.");
+                    MessageBox.Show("Please select a server.");
                     return;
                 }
-                string connectionString = ServerComboBox.SelectedValue.ToString();
-                
+                string serverType = "";
+                string connectionString = "";
+                var selectedServer = ServerComboBox.SelectedItem as Server; 
+                if (selectedServer != null)
+                {
+                    serverType = selectedServer.ServerType; 
+                    connectionString = selectedServer.ConnectionString; 
+                                    }
+                else
+                {
+                    MessageBox.Show("Failed to retrieve server details.");
+                }
 
-                var context = new DataContext2(connectionString);
+                var context = new DataContext2(connectionString, serverType);
                 DateTime requestTimeFilter = DateTime.Parse(UtcDatetimeTextBox.Text);
                 string clientIp = IpAddressTextBox.Text;
 
@@ -103,14 +113,20 @@ namespace WpfRequestResponseLogger.Views
                     MessageBox.Show("The IP address entered is not a valid IPv4 or IPv6 address.", "Invalid IP", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
+                if (serverType == "sqlserver")
+                {
+                    logsList = context.Set<LogData>()
+                        .FromSqlInterpolated($"EXEC GetLogsFilteredByTimeAndClientIp {requestTimeFilter}, {clientIp}")
+                        .ToList();
+                }
+                else if (serverType == "mysql")
+                {
+                    logsList = context.Set<LogData>()
+                        .FromSqlInterpolated($"CALL GetLogsFilteredByTimeAndClientIp({requestTimeFilter:yyyy-MM-dd HH:mm:ss.fff}, {clientIp})")
+                        .ToList();
 
-                logsList = context.Set<LogData>()
-                    .FromSqlInterpolated($"EXEC GetLogsFilteredByTimeAndClientIp {requestTimeFilter}, {clientIp}")
-                    .ToList();
 
-
-                
-
+                }
                 LogsDataGrid.ItemsSource = logsList;
 
             }

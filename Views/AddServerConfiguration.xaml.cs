@@ -7,14 +7,15 @@ namespace WpfRequestResponseLogger
     public partial class AddServerConfiguration : Window
     {
         private string _connectionString;
+        private string _serverType;
 
-        public AddServerConfiguration(string connectionString)
+        public AddServerConfiguration(string connectionString, string serverType)
         {
             InitializeComponent();
             _connectionString = connectionString;
-
             // Automatically fill the LastUpdated field with the current UTC time
             LastUpdatedTextBox.Text = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+            _serverType = serverType;
         }
 
         // Event handler for the Save button click
@@ -40,7 +41,7 @@ namespace WpfRequestResponseLogger
             }
 
             // Add the new Configuration to the database
-            using (var context = new DataContext2(_connectionString)) // Use the connection string of the selected server
+            using (var context = new DataContext2(_connectionString, _serverType)) //  Use the connection string of the selected server
             {
                 var newConfiguration = new Configuration
                 {

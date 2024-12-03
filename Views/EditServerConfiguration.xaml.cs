@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System;
 using System.Windows;
 using WpfRequestResponseLogger.Models; 
 
@@ -7,12 +8,14 @@ namespace WpfRequestResponseLogger
     public partial class EditServerConfiguration : Window
     {
         private string _connectionString;
+        private string _serverType;
         private Configuration _selectedConfiguration;
 
-        public EditServerConfiguration(string connectionString, Configuration selectedConfiguration)
+        public EditServerConfiguration(string connectionString, string serverType, Configuration selectedConfiguration)
         {
             InitializeComponent();
             _connectionString = connectionString;
+            _serverType = serverType;
             _selectedConfiguration = selectedConfiguration;
 
             // Load the configuration data into the TextBoxes
@@ -56,7 +59,7 @@ namespace WpfRequestResponseLogger
             _selectedConfiguration.LastUpdated = lastUpdated;
 
             // Save the changes to the database
-            using (var context = new DataContext2(_connectionString))
+            using (var context = new DataContext2(_connectionString, _serverType))  
             {
                 context.Configurations.Update(_selectedConfiguration);
                 context.SaveChanges();

@@ -47,7 +47,7 @@
             <MenuItem Header="Exit" Click="ExitMenuItem_Click"/>
         </Menu>
         <Grid>
-            <TextBlock Text="Welcome to the Log Viewer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+            <TextBlock Text="Welcome to the Cybelin Monitor" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
         </Grid>
     </DockPanel>
 </Window>

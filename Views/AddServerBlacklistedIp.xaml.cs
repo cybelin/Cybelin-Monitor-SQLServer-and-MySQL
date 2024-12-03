@@ -8,14 +8,16 @@ namespace WpfRequestResponseLogger
     public partial class AddServerBlacklistedIp : Window
     {
         private string _connectionString;
+        private string _serverType;
 
-        public AddServerBlacklistedIp(string connectionString)
+        public AddServerBlacklistedIp(string connectionString, string serverType)
         {
             InitializeComponent();
             _connectionString = connectionString;
 
             // Automatically fill the DateAdded field with the current UTC time
             DateAddedTextBox.Text = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+            _serverType = serverType;
         }
 
         // Event handler for the Save button click
@@ -41,7 +43,7 @@ namespace WpfRequestResponseLogger
             }
 
             // Add the new Blacklisted IP to the database
-            using (var context = new DataContext2(_connectionString))
+            using (var context = new DataContext2(_connectionString, _serverType))  
             {
                 var newBlacklistedIp = new BlacklistedIp
                 {

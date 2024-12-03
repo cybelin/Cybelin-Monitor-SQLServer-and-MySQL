@@ -51,7 +51,7 @@ namespace WpfRequestResponseLogger
             foreach (var server in servers)
             {
                 
-                using (var destinationContext = new DataContext2(server.ConnectionString))
+                using (var destinationContext = new DataContext2(server.ConnectionString, server.ServerType))
                 {
                     SyncWithServer(destinationContext, blacklistedIps);
                 }
